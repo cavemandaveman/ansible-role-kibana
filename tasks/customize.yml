@@ -3,6 +3,6 @@
   lineinfile:
     path: "{{ kibana_config_dirs.home }}/config/kibana.yml"
     line: "{{ item.key }}: {{ item.value }}"
-    insertafter: "^#{{ item.key }}"
+    regexp: "^#?{{ item.key }}"
     firstmatch: "yes"
   with_dict: "{{ kibana_properties }}"
