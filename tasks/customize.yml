@@ -1,0 +1,8 @@
+---
+- name: Update Kibana conf file
+  lineinfile:
+    path: "{{ kibana_config_dirs.home }}/config/kibana.yml"
+    line: "{{ item.key }}: {{ item.value }}"
+    insertafter: "^#{{ item.key }}"
+    firstmatch: "yes"
+  with_dict: "{{ kibana_properties }}"

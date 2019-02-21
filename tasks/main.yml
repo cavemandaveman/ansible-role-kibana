@@ -1,0 +1,12 @@
+---
+- name: Prepare system
+  include: prepare.yml
+
+- name: Install Kibana
+  include: install.yml
+
+- name: Customize Kibana
+  include: customize.yml
+
+- name: Run Kibana as system service
+  include: run.yml

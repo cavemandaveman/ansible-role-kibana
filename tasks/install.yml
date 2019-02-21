@@ -1,0 +1,22 @@
+---
+- name: Download Kibana binary
+  get_url:
+    url: "https://artifacts.elastic.co/downloads/kibana/kibana-{{ kibana_version }}-linux-x86_64.tar.gz"
+    dest: "/tmp/kibana-{{ kibana_version }}-linux-x86_64.tar.gz"
+
+- name: Unpack Kibana binary
+  unarchive:
+    remote_src: "yes"
+    src: "/tmp/kibana-{{ kibana_version }}-linux-x86_64.tar.gz"
+    dest: "{{ kibana_config_dirs.install }}/"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    creates: "{{ kibana_config_dirs.install }}/kibana-{{ kibana_version }}-linux-x86_64"
+
+- name: Create Kibana symlink
+  file:
+    src: "kibana-{{ kibana_version }}-linux-x86_64"
+    path: "{{ kibana_config_dirs.home }}"
+    state: "link"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"

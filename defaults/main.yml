@@ -1,0 +1,15 @@
+---
+kibana_version: "5.6.15"
+
+kibana_config_dirs:
+  install: "/opt/kibana/releases"
+  home: "/opt/kibana/releases/current"
+
+kibana_user: kibana
+kibana_group: kibana
+
+# Specify any property from kibana.yml here. Leave blank for defaults.
+# See https://github.com/elastic/kibana/blob/master/config/kibana.yml for current options.
+kibana_properties:
+  pid.file: "{{ kibana_config_dirs.home }}/kibana.pid"
+  logging.dest: "{{ kibana_config_dirs.home }}/kibana.log"

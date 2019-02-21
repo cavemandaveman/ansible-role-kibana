@@ -1,0 +1,28 @@
+---
+- name: Create Kibana group
+  group:
+    name: "{{ kibana_group }}"
+    state: "present"
+    system: "yes"
+
+- name: Create Kibana user
+  user:
+    name: "{{ kibana_user }}"
+    groups: "{{ kibana_group }}"
+    append: "yes"
+    state: "present"
+    create_home: "no"
+    system: "yes"
+
+- name: Create install directory
+  file:
+    path: "{{ kibana_config_dirs.install }}"
+    state: "directory"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+
+- name: Set Kibana home
+  lineinfile:
+    path: "/etc/environment"
+    line: "export KIBANA_HOME={{ kibana_config_dirs.home }}"
+    create: "yes"

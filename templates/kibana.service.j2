@@ -1,0 +1,13 @@
+[Unit]
+Description=Kibana
+ 
+[Service]
+Type=simple
+User={{ kibana_user }}
+Group={{ kibana_group }}
+ExecStart={{ kibana_config_dirs.home }}/bin/kibana
+Restart=always
+WorkingDirectory={{ kibana_config_dirs.home }}
+
+[Install]
+WantedBy=multi-user.target
